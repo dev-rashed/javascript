@@ -189,3 +189,14 @@
 //     .catch(function(err) {
 //         console.log(err);
 //     });
+
+// Fetch API
+
+// document.getElementById('get_data').addEventListener('click', getData);
+
+// function getData() {
+//     fetch('http://api.icndb.com/jokes/random')
+//         .then(res => res.json()) // Arrow Function
+//         .then(data => { console.log(data); })
+//         .catch(err => { console.log(err); })
+// }
