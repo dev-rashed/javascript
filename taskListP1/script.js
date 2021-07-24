@@ -12,6 +12,7 @@ form.addEventListener('submit', createList);
 fullList.addEventListener('click', removeList);
 clear.addEventListener('click', clearList);
 filter.addEventListener('keyup', filterList);
+document.addEventListener('DOMContentLoaded', getList);
 
 // Functions
 // Create New List
@@ -27,6 +28,7 @@ function createList(e) {
         li.textContent = addInput.value + '  ';
         li.appendChild(link);
         fullList.appendChild(li);
+        addIntoLocalStorage(addInput.value);
         addInput.value = '';
         console.log('Added new :)');
     }
@@ -40,6 +42,7 @@ function removeList(e) {
             let item = li.firstChild.textContent;
             li.remove();
             console.log(`${item} removed :(`);
+            removeFromLocal(item);
         }
     }
 }
@@ -76,4 +79,51 @@ function filterList(e) {
             }
         })
     }
+}
+
+// Add to local storage
+function addIntoLocalStorage(item) {
+    let lists;
+    if (localStorage.getItem('lists') === null) {
+        lists = [];
+    } else {
+        lists = JSON.parse(localStorage.getItem('lists'));
+    }
+    console.log(lists);
+
+    lists.push(item);
+    localStorage.setItem('lists', JSON.stringify(lists));
+}
+
+function getList() {
+    let lists;
+    if (localStorage.getItem('lists') === null) {
+        lists = [];
+    } else {
+        lists = JSON.parse(localStorage.getItem('lists'));
+    }
+
+    lists.forEach(item => {
+        // console.log(item);
+        let li = document.createElement('li');
+        let link = document.createElement('a');
+        link.setAttribute('href', '#');
+        link.innerHTML = 'X';
+        li.textContent = item + '  ';
+        li.appendChild(link);
+        fullList.appendChild(li);
+    });
+}
+
+// Remove From localStorage
+function removeFromLocal(item) {
+    let lists;
+    if (localStorage.getItem('lists') === null) {
+        lists = [];
+    } else {
+        lists = JSON.parse(localStorage.getItem('lists'));
+    }
+    lists.forEach(li => {
+        console.log(li);
+    });
 }
