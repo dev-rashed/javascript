@@ -1,64 +1,79 @@
-console.log('JS works fine');
+console.log('Happy JS :)');
 
-// Define UI
+// UI Define
 let form = document.querySelector('#todo_form');
-let listInput = document.querySelector('#new_todo');
+let addInput = document.querySelector('#new_todo');
 let filter = document.querySelector('#filter_todo');
-let todoList = document.querySelector('#todo_list');
-let clearBtn = document.querySelector('#clear_todo');
+let fullList = document.querySelector('#todo_list');
+let clear = document.querySelector('#clear_todo');
 
-// Define Event Listner
-form.addEventListener('submit', addList);
-todoList.addEventListener('click', removeTask);
-clearBtn.addEventListener('click', clearTodo);
-filter.addEventListener('keyup', filterTodo);
+// Define Listener
+form.addEventListener('submit', createList);
+fullList.addEventListener('click', removeList);
+clear.addEventListener('click', clearList);
+filter.addEventListener('keyup', filterList);
 
-// Define Function
-// Add list
-function addList(e) {
+// Functions
+// Create New List
+function createList(e) {
     e.preventDefault();
-    if (listInput.value === '') {
-        alert('Please add a value');
+    if (addInput.value === '') {
+        alert('No data, please add data :(');
     } else {
         let li = document.createElement('li');
-        li.appendChild(document.createTextNode(listInput.value + '  '));
         let link = document.createElement('a');
         link.setAttribute('href', '#');
-        link.innerHTML = 'x';
-        li.appendChild(link)
-        todoList.appendChild(li);
-        listInput.value = '';
+        link.innerHTML = 'X';
+        li.textContent = addInput.value + '  ';
+        li.appendChild(link);
+        fullList.appendChild(li);
+        addInput.value = '';
+        console.log('Added new :)');
     }
 }
 
-// Remove list
-function removeTask(e) {
-    e.preventDefault();
+// Remove single List
+function removeList(e) {
     if (e.target.hasAttribute('href')) {
-        if (confirm('Are you sure you want to delete?')) {
-            let el = e.target.parentElement;
-            el.remove();
+        let li = e.target.parentNode;
+        if (confirm('Delete! Are you sure?')) {
+            let item = li.firstChild.textContent;
+            li.remove();
+            console.log(`${item} removed :(`);
         }
     }
 }
 
-// Clear Todo
-function clearTodo(e) {
-    e.preventDefault();
-    todoList.innerHTML = '';
+// Clear List
+function clearList() {
+    if (fullList.hasChildNodes()) {
+        let li = document.querySelectorAll('li');
+        if (confirm('Delete!, full list will be deleted')) {
+            let count = li.length;
+            li.forEach(item => {
+                item.remove();
+            });
+            console.log(`${count} item removed :(`);
+        }
+    }
 }
 
-// Filter Todo
-function filterTodo(e) {
-    e.preventDefault();
-    let text = e.target.value.toLowerCase();
-
-    document.querySelectorAll('li').forEach(todo => {
-        let item = todo.firstChild.textContent;
-        if (item.toLowerCase().indexOf(text) != -1) {
-            todo.style.display = 'block';
-        } else {
-            todo.style.display = 'none';
-        }
-    })
+// Filter List
+function filterList(e) {
+    let searchValue = e.target.value.toLowerCase();
+    // console.log(searchValue);
+    let toDoListItem = document.querySelectorAll('li');
+    if (searchValue !== null) {
+        toDoListItem.forEach(item => {
+            // console.log(item);
+            let li = item.textContent.toLowerCase();
+            if (li.indexOf(searchValue) != -1) {
+                console.log(`${searchValue} Match to : ${li}`);
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+                // console.log('Not Matched');
+            }
+        })
+    }
 }
