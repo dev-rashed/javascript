@@ -41,8 +41,8 @@ function removeList(e) {
         if (confirm('Delete! Are you sure?')) {
             let item = li.firstChild.textContent;
             li.remove();
-            console.log(`${item} removed :(`);
-            removeFromLocal(item);
+            console.log(`${item}removed from UI :(`);
+            removeFromLocal(li);
         }
     }
 }
@@ -56,6 +56,7 @@ function clearList() {
             li.forEach(item => {
                 item.remove();
             });
+            localStorage.clear();
             console.log(`${count} item removed :(`);
         }
     }
@@ -71,7 +72,7 @@ function filterList(e) {
             // console.log(item);
             let li = item.textContent.toLowerCase();
             if (li.indexOf(searchValue) != -1) {
-                console.log(`${searchValue} Match to : ${li}`);
+                // console.log(`${searchValue} Match to : ${li}`);
                 item.style.display = 'block';
             } else {
                 item.style.display = 'none';
@@ -89,7 +90,7 @@ function addIntoLocalStorage(item) {
     } else {
         lists = JSON.parse(localStorage.getItem('lists'));
     }
-    console.log(lists);
+    // console.log(lists);
 
     lists.push(item);
     localStorage.setItem('lists', JSON.stringify(lists));
@@ -116,14 +117,23 @@ function getList() {
 }
 
 // Remove From localStorage
-function removeFromLocal(item) {
+function removeFromLocal(li) {
     let lists;
     if (localStorage.getItem('lists') === null) {
         lists = [];
     } else {
         lists = JSON.parse(localStorage.getItem('lists'));
     }
-    lists.forEach(li => {
-        console.log(li);
+
+    let item = li;
+    item.removeChild(li.lastChild);
+    console.log(item.textContent.trim());
+    lists.forEach((list, index) => {
+        if (item.textContent.trim() === list) {
+            // console.log('Found');
+            lists.splice(index, 1);
+            console.log('removed from local :(');
+        }
     });
+    localStorage.setItem('lists', JSON.stringify(lists))
 }
