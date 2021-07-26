@@ -13,6 +13,7 @@ submitBtn.addEventListener("click", (e) => {
       .then((data) => data.json())
       .then((data) => {
         if (data.message == "Not Found") {
+            ui.showAlert("No User found", "error");
         } else {
           ui.clearProfile();
           ui.showProfile(data);
