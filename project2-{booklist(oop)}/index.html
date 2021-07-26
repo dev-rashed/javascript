@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
+        <style>
+            .success, .error {
+                padding: 5px 10px;
+                color: white;
+                margin: 5px 0 15px 0;
+            }
+            .error {
+                background: red;
+            }
+            .success {
+                background: green;
+            }
+        </style>
+        
+    </head>
+    <body>
+
+        <div class="container">
+        
+            <form action="" id="add_book">
+                <h4>Add New Book</h4>
+                <div>
+                    <label for="name">Book Name</label>
+                    <input type="text" class="u-full-width" id="name">
+                </div>
+                <div>
+                    <label for="author">Author</label>
+                    <input type="text" class="u-full-width" id="author">
+                </div>
+                <div>
+                    <label for="author">ISBN</label>
+                    <input type="text" class="u-full-width" id="isbn">
+                </div>
+                <div>
+                    <input type="submit" class="u-full-width" value="Submit">
+                </div>
+            </form>
+            
+
+            <hr>
+
+            <h5>Book List</h5>
+            <table class="u-full-width">
+                <thead>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th></th>
+                </thead>
+                <tbody id="book_list">
+                </tbody>
+            </table>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
