@@ -1,0 +1,27 @@
+.alert {
+    color: white;
+}
+.success { 
+    background: green;
+}
+.error {
+    background: red;
+}
+.card {
+    position: relative;
+}  
+a.remove_product_from_products {
+    position: absolute;
+    text-decoration: none;
+    background: #ffffff;
+    width: 25px;
+    text-align: center;
+    border-radius: 50%;
+    right: 3px;
+    box-shadow: 0px 1px 6px #fff;
+    top: 3px;
+}
+#table td.name,
+#table td.price {
+    font-size: 13px;
+}
